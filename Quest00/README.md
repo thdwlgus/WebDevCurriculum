@@ -51,10 +51,13 @@
     - **일반 태그(Lightweight) :** 이름만 붙이기 가능
     - **주석 태그(Annotated tag) :** 이름, 태그에 대한 설명, 서명, 태그를 만든 사람의 이름, 이메일, 만든 날짜 정보도 기록 가능
 - 리모트 git 저장소에 원하지 않는 파일이 올라갔을 때 이를 되돌리려면 어떻게 해야 할까요?
+
   > git reset --hard <돌아갈 commit><br>git push -f
+
   - reset 사용하여 되돌아갈 commit으로 이동, 강제로 원격 브랜치에 push
 
-* > git log --online //커밋 기록 확인<br>git revert <취소할 커밋> //커밋을 취소<br>git commit -m "revert message" push
+  > git log --online //커밋 기록 확인<br>git revert <취소할 커밋> //커밋을 취소<br>git commit -m "revert message" push
+
   - revert 사용하여 commit을 취소
 
 ## Quest
