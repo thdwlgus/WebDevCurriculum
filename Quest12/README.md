@@ -1,32 +1,63 @@
 # Quest 12. 보안의 기초
 
 ## Introduction
-* 이번 퀘스트에서는 가장 기초적인 웹 서비스 보안에 대해 알아보겠습니다.
+
+- 이번 퀘스트에서는 가장 기초적인 웹 서비스 보안에 대해 알아보겠습니다.
 
 ## Topics
-* XSS, CSRF, SQL Injection
-* HTTPS, TLS
+
+- XSS, CSRF, SQL Injection
+- HTTPS, TLS
 
 ## Resources
-* [The Basics of Web Application Security](https://martinfowler.com/articles/web-security-basics.html)
-* [Website Security 101](https://spyrestudios.com/web-security-101/)
-* [Web Security Fundamentals](https://www.shopify.com.ng/partners/blog/web-security-2018)
-* [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/)
-* [Wikipedia - TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security)
+
+- [The Basics of Web Application Security](https://martinfowler.com/articles/web-security-basics.html)
+- [Website Security 101](https://spyrestudios.com/web-security-101/)
+- [Web Security Fundamentals](https://www.shopify.com.ng/partners/blog/web-security-2018)
+- [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/)
+- [Wikipedia - TLS](https://en.wikipedia.org/wiki/Transport_Layer_Security)
 
 ## Checklist
-* 입력 데이터의 Validation을 웹 프론트엔드에서 했더라도 서버에서 또 해야 할까요? 그 이유는 무엇일까요?
-  * 서버로부터 받은 HTML 내용을 그대로 검증 없이 프론트엔드에 innerHTML 등을 통해 적용하면 어떤 문제점이 있을까요?
-  * XSS(Cross-site scripting)이란 어떤 공격기법일까요?
-  * CSRF(Cross-site request forgery)이란 어떤 공격기법일까요?
-  * SQL Injection이란 어떤 공격기법일까요?
-* 대부분의 최신 브라우저에서는 HTTP 대신 HTTPS가 권장됩니다. 이유가 무엇일까요?
-  * HTTPS와 TLS는 어떤 식으로 동작하나요? HTTPS는 어떤 역사를 가지고 있나요?
-  * HTTPS의 서비스 과정에서 인증서는 어떤 역할을 할까요? 인증서는 어떤 체계로 되어 있을까요?
+
+- 입력 데이터의 Validation을 웹 프론트엔드에서 했더라도 서버에서 또 해야 할까요? 그 이유는 무엇일까요?
+  - **보안 :** 사용자는 웹 페이지를 조작하여 서버로 잘못된 데이터 전송 가능. 서버 측에서 데이터를 다시 한 번 확인하면 이러한 위협 방지 가능
+  - **안정성 :** 서버는 입력 데이터를 처리, 저장해야하는 경우 많음. 서버 측에서 데이터를 검증하면 잘못된 데이터가 서버에 저장되지 않으므로 시스템 안정성 유지 가능
+  - **일관성 :** 입력 데이터의 유효성 검사를 서버 측에서 수행하면 클라이언트와 서버 간의 데이터 일관성 유지. 이는 서버 측에서 추가 유효성 검사를 수행하는 것이 중요한 이유 중 하나
+- 서버로부터 받은 HTML 내용을 그대로 검증 없이 프론트엔드에 innerHTML 등을 통해 적용하면 어떤 문제점이 있을까요?
+  - 악성 코드가 실행될 수 있으며, 이로 인해 클라이언트 시스템이 해킹당할 가능성 존재
+  - 웹 애플리케이션의 일관성과 안정성이 해칠 가능성 존재
+  - 의도치 않은 결과가 나타날 가능성, 이는 사용자 경험 악화
+- XSS(Cross-site scripting)이란 어떤 공격기법일까요?
+  - 웹 애플리케이션에서 발생하는 취약점 중 하나로, 악의적인 사용자가 공격자가 의도한 악성 스크립트를 다른 사용자에게 전달하거나 실행시키는 공격 기법
+  - 주로 웹 페이지에서 입력 폼, 댓글 기능, 검색 기능 등을 이용하여 실행
+  - 클라이언트 측에서 실행되는 악성 스크립트는 사용자의 쿠키 정보, 세션 ID 등 중요한 정보를 탈취 가능
+  - 사용자의 컴퓨터를 제어하여 악성 행위를 수행 가능
+- CSRF(Cross-site request forgery)이란 어떤 공격기법일까요?
+  - 웹 애플리케이션에서 발생하는 취약점 중 하나로, 인증된 사용자가 자신의 의지와 무관하게 공격자가 의도한 작업을 수행하도록 하는 공격 기법
+  - 공격자가 특정 웹 사이트에서 로그인한 상태에서 공격 대상자가 악성 웹 사이트를 방문하면서 이루어짐
+  - 공격 대상자가 자신의 의지와 무관하게 자동으로 요청을 수행
+  - 공격자가 의도한 작업은 공격 대상자의 권한으로 수행되기 때문에, 데이터 변경, 계정 탈취, 결제 등 다양한 악성 행위가 가능
+- SQL Injection이란 어떤 공격기법일까요?
+  - 애플리케이션에서 발생하는 취약점 중 하나로, 악의적인 사용자가 애플리케이션에서 사용하는 데이터베이스에 대한 SQL 쿼리를 조작하여, 데이터베이스를 비정상적으로 조작하거나 데이터를 탈취하는 공격 기법
+  - 주로 웹 애플리케이션의 입력 폼을 통해 이루어짐
+  - 공격자가 데이터베이스에 저장된 중요한 정보(개인 정보, 인증 정보, 금융 정보 등)를 탈취할 수 있으며, 데이터베이스에 대한 악성 조작을 수행
+  - 공격자는 애플리케이션을 사용하는 모든 사용자의 정보에 접근할 수도 있으며, 시스템에 대한 악성 행위를 수행
+- 대부분의 최신 브라우저에서는 HTTP 대신 HTTPS가 권장됩니다. 이유가 무엇일까요?
+  - 데이터를 암호화하고 인증하기 위해 SSL/TLS 프로토콜을 사용
+  - 용자의 브라우저와 웹 서버 간의 통신을 보호하고 중간자 공격을 방지하는 데 도움
+  - 브라우저에서 제공하는 보안 기능 중 하나
+  - 검색 엔진 최적화 (SEO) 측면에서도 중요
+- HTTPS와 TLS는 어떤 식으로 동작하나요? HTTPS는 어떤 역사를 가지고 있나요?
+  - **HTTPS :** 일반 HTTP와 다르게 데이터를 암호화하고 인증하기 위해 SSL/TLS 프로토콜을 사용
+  - **SSL/TLS :** 대칭형 암호화 및 공개키 암호화와 같은 다양한 암호화 기술을 사용하여 데이터의 기밀성, 무결성 및 인증을 보호
+- HTTPS의 서비스 과정에서 인증서는 어떤 역할을 할까요? 인증서는 어떤 체계로 되어 있을까요?
+  - HTTPS의 서비스 과정에서 인증서는 인터넷 상의 웹사이트의 신원을 확인하고, 데이터를 암호화하여 안전하게 전송하기 위한 역할을 수행
 
 ## Quest
-* 메모장의 서버와 클라이언트에 대해, 로컬에서 발행한 인증서를 통해 HTTPS 서비스를 해 보세요.
+
+- 메모장의 서버와 클라이언트에 대해, 로컬에서 발행한 인증서를 통해 HTTPS 서비스를 해 보세요.
 
 ## Advanced
-* TLS의 인증서에 쓰이는 암호화 알고리즘은 어떤 종류가 있을까요?
-* HTTP/3은 기존 버전과 어떻게 다를까요? HTTP의 버전 3이 나오게 된 이유는 무엇일까요?
+
+- TLS의 인증서에 쓰이는 암호화 알고리즘은 어떤 종류가 있을까요?
+- HTTP/3은 기존 버전과 어떻게 다를까요? HTTP의 버전 3이 나오게 된 이유는 무엇일까요?
